@@ -23,7 +23,7 @@ window.STORE = {
    bundle: buy `qty` pieces from the same group for `price` total.
    ------------------------------------------------------------------ */
 
-const DUNGAREE_SIZES = ["Small", "Medium", "Large"];
+const DUNGAREE_SIZES = ["Small (6–12 months)", "Medium (12–18 months)", "Large (18–24 months)"];
 
 const DUNGAREE_DETAILS = {
   description:
