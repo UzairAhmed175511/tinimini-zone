@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shop baby & kids clothing | Tinimini ZONE</title>
+  <meta name="description" content="Shop baby dungaree sets in peach, light blue, cream and mint. Rs. 999 each or 2 for Rs. 1,900. Cash on delivery across Pakistan.">
+  <meta name="theme-color" content="#fffdf8">
+  <meta property="og:title" content="Shop baby & kids clothing | Tinimini ZONE">
+  <meta property="og:description" content="Shop baby dungaree sets in peach, light blue, cream and mint. Rs. 999 each or 2 for Rs. 1,900. Cash on delivery across Pakistan.">
+  <meta property="og:image" content="images/lifestyle-boy.webp">
+  <link rel="icon" href="images/logo.webp">
+  <link rel="apple-touch-icon" href="images/logo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Young+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>window.__imgFallback=function(i){i.onerror=null;i.src="images/placeholder.svg"}</script>
+</head>
+<body data-page="shop">
+  <div id="site-header"></div>
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap">
+        <h1>Shop the collection</h1>
+        <p class="lede">Every set is Rs. 999 — add any two and pay Rs. 1,900.</p>
+      </div>
+    </section>
+    <section class="wrap">
+      <p class="muted" id="search-info" hidden></p>
+      <div class="toolbar">
+        <div class="chips" id="color-chips" aria-label="Filter by colour"></div>
+        <div style="display:flex;gap:14px;align-items:center">
+          <span class="muted" id="result-count" aria-live="polite"></span>
+          <label class="sr-only" for="sort">Sort products</label>
+          <select class="select" id="sort">
+            <option value="featured">Featured</option>
+            <option value="low">Price: low to high</option>
+            <option value="high">Price: high to low</option>
+          </select>
+        </div>
+      </div>
+      <div class="product-grid" id="shop-grid"></div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

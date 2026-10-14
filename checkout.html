@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout | Tinimini ZONE</title>
+  <meta name="description" content="Place your Tinimini ZONE order with cash on delivery.">
+  <meta name="theme-color" content="#fffdf8">
+  <meta property="og:title" content="Checkout | Tinimini ZONE">
+  <meta property="og:description" content="Place your Tinimini ZONE order with cash on delivery.">
+  <meta property="og:image" content="images/lifestyle-boy.webp">
+  <link rel="icon" href="images/logo.webp">
+  <link rel="apple-touch-icon" href="images/logo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Young+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>window.__imgFallback=function(i){i.onerror=null;i.src="images/placeholder.svg"}</script>
+  <meta name="robots" content="noindex">
+</head>
+<body data-page="checkout">
+  <div id="site-header"></div>
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap"><h1>Checkout</h1><p class="lede">Pay cash when your parcel arrives. We'll confirm your order on WhatsApp.</p></div>
+    </section>
+    <section class="wrap checkout" id="checkout-main">
+      <form id="checkout-form" name="order" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="order">
+        <input type="hidden" name="order_id">
+        <input type="hidden" name="items">
+        <input type="hidden" name="total">
+        <p class="hidden-field"><label>Leave this empty <input name="bot-field"></label></p>
+        <div class="panel">
+          <h2>Delivery details</h2>
+          <div class="form-grid">
+            <div class="field full"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required><p class="error" id="err-name"></p></div>
+            <div class="field"><label for="phone">Mobile number <span>(WhatsApp preferred)</span></label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0300 1234567" required><p class="error" id="err-phone"></p></div>
+            <div class="field"><label for="city">City</label><input id="city" name="city" autocomplete="address-level2" required><p class="error" id="err-city"></p></div>
+            <div class="field full"><label for="address">Full address</label><textarea id="address" name="address" autocomplete="street-address" placeholder="House no., street, area, nearest landmark" required></textarea><p class="error" id="err-address"></p></div>
+            <div class="field full"><label for="notes">Order notes <span>(optional)</span></label><input id="notes" name="notes" placeholder="e.g. baby's age, preferred delivery time"></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h2>Payment</h2>
+          <div class="pay-option"><span data-icon="cash"></span><div><strong>Cash on delivery</strong><span>Pay the rider in cash when your order arrives.</span></div></div>
+          <p class="muted" style="margin:16px 0">After you place the order, WhatsApp opens with your order details so we can confirm it quickly.</p>
+          <button class="btn btn-primary btn-block" type="submit" id="place-order">Place order</button>
+        </div>
+      </form>
+      <aside class="panel summary" aria-labelledby="summary-title">
+        <h2 id="summary-title">Order summary</h2>
+        <div id="summary-body"></div>
+      </aside>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
