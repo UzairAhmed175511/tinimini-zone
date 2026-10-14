@@ -215,6 +215,7 @@
                 <li><a href="${esc(S.facebook)}" target="_blank" rel="noopener">Facebook</a></li>
                 ${S.instagram ? `<li><a href="${esc(S.instagram)}" target="_blank" rel="noopener">Instagram</a></li>` : ""}
                 ${S.tiktok ? `<li><a href="${esc(S.tiktok)}" target="_blank" rel="noopener">TikTok</a></li>` : ""}
+                ${S.youtube ? `<li><a href="${esc(S.youtube)}" target="_blank" rel="noopener">YouTube</a></li>` : ""}
               </ul>
             </div>
           </div>
