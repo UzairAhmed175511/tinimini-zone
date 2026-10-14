@@ -9,8 +9,8 @@ window.STORE = {
   whatsapp: "923101310199",          // international format, no + or spaces
   phoneDisplay: "0310 1310199",
   email: "08tiniminizone@gmail.com",
-  facebook: "https://www.facebook.com/profile.php?id=61595466806658",
-  instagram: "",                      // add your Instagram link here, e.g. https://instagram.com/yourhandle
+  facebook: "https://www.facebook.com/tiniminizone",
+  instagram: "https://www.instagram.com/08tiniminizone/",
   currency: "Rs.",
   // Delivery fee in rupees. Set to null to show "Confirmed on WhatsApp".
   deliveryFee: null,
@@ -23,7 +23,7 @@ window.STORE = {
    bundle: buy `qty` pieces from the same group for `price` total.
    ------------------------------------------------------------------ */
 
-const DUNGAREE_SIZES = ["6–12 months", "12–18 months", "18–24 months", "2–3 years"];
+const DUNGAREE_SIZES = ["Small", "Medium", "Large"];
 
 const DUNGAREE_DETAILS = {
   description:

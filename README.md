@@ -27,7 +27,7 @@ Everything you'll want to change is in **`assets/js/config.js`**:
 - Products: name, colour, price, bundle deal, sizes, description, image
 - To add a new product, copy one product block, give it a new `id` and image
 
-Size chart numbers are in `size-guide.html` and `product.html` — update them to match your actual sizes.
+Sizes (Small, Medium, Large) are in `config.js`; the size chart text is in `size-guide.html` and `product.html`.
 
 ## Images
 
