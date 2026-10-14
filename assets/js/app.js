@@ -15,6 +15,28 @@
     String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const waLink = (text) => `https://wa.me/${S.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
 
+  /* ---------- Meta Pixel (Facebook + Instagram ads) ---------- */
+  (function initPixel() {
+    const id = (S.metaPixelId || "").trim();
+    if (!/^\d{6,20}$/.test(id) || window.fbq) return;
+    /* eslint-disable */
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    /* eslint-enable */
+    window.fbq("init", id);
+    window.fbq("track", "PageView");
+  })();
+  const track = (event, params, opts) => {
+    try {
+      if (window.fbq) window.fbq("track", event, params || {}, opts || {});
+    } catch (e) {
+      /* tracking must never break the shop */
+    }
+  };
+
   const store = {
     get(key, fallback) {
       try {
@@ -120,6 +142,8 @@
     if (line) line.qty = Math.min(line.qty + qty, 20);
     else cart.push({ id, size, qty });
     saveCart();
+    const p = byId(id);
+    if (p) track("AddToCart", { content_ids: [p.id], content_name: `${p.name} - ${p.color}`, content_type: "product", value: p.price * qty, currency: "PKR" });
   }
 
   function setQty(index, qty) {
@@ -440,6 +464,7 @@
     document.addEventListener("click", (e) => {
       const t = e.target.closest("button, a");
       if (!t) return;
+      if (t.tagName === "A" && /wa\.me\//.test(t.href || "")) track("Contact", { method: "WhatsApp" });
       if (t.id === "cart-toggle") return openDrawer();
       if (t.id === "drawer-close") return closeDrawer();
       if (t.id === "menu-toggle") {
@@ -544,6 +569,7 @@
     if (!grid) return;
     const params = new URLSearchParams(location.search);
     let q = (params.get("q") || "").trim().toLowerCase();
+    if (q) track("Search", { search_string: q });
     let cat = "all";
     let sort = "featured";
     const chips = $("#color-chips");
@@ -597,6 +623,7 @@
 
     const render = () => {
       document.title = `${p.name} — ${p.color} | ${S.name}`;
+      track("ViewContent", { content_ids: [p.id], content_name: `${p.name} - ${p.color}`, content_category: p.category, content_type: "product", value: p.price, currency: "PKR" });
       $("#crumb-name").textContent = `${p.name} · ${p.color}`;
       const others = siblings.filter((s) => s.id !== p.id);
       const gallery = [
@@ -784,6 +811,7 @@
       }
       const t = priceCart(cart);
       summary.innerHTML = cart.map((l, i) => lineHTML(l, i, true)).join("") + `<div style="margin-top:16px">${totalsHTML(t)}</div>`;
+      track("InitiateCheckout", { content_ids: cart.map((l) => l.id), num_items: t.count, value: t.grand, currency: "PKR", content_type: "product" });
       return true;
     };
     if (!drawSummary()) return;
@@ -833,6 +861,11 @@
       form.elements.order_id.value = orderId;
       form.elements.items.value = items;
       form.elements.total.value = money(t.grand);
+      track(
+        "Purchase",
+        { content_ids: cart.map((l) => l.id), content_type: "product", num_items: t.count, value: t.grand, currency: "PKR" },
+        { eventID: orderId }
+      );
 
       // Netlify Forms records the order in your Netlify dashboard (Forms tab).
       try {

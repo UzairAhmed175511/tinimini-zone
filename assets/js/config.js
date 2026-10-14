@@ -13,6 +13,9 @@ window.STORE = {
   instagram: "https://www.instagram.com/08tiniminizone/",
   tiktok: "https://www.tiktok.com/@08tiniminizone",
   youtube: "https://www.youtube.com/@08tiniminizone",
+  // Meta (Facebook/Instagram) Pixel ID from Events Manager, e.g. "123456789012345".
+  // Leave empty to turn tracking off.
+  metaPixelId: "",
   currency: "Rs.",
   // Delivery fee in rupees. Set to null to show "Confirmed on WhatsApp".
   deliveryFee: null,
