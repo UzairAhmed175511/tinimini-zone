@@ -15,7 +15,7 @@ window.STORE = {
   youtube: "https://www.youtube.com/@08tiniminizone",
   // Meta (Facebook/Instagram) Pixel ID from Events Manager, e.g. "123456789012345".
   // Leave empty to turn tracking off.
-  metaPixelId: "",
+  metaPixelId: "3036047803407996",
   currency: "Rs.",
   // Delivery fee in rupees. Set to null to show "Confirmed on WhatsApp".
   deliveryFee: null,
