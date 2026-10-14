@@ -83,7 +83,7 @@
       const p = byId(l.id);
       if (!p) return;
       subtotal += p.price * l.qty;
-      const key = p.group || p.id;
+      const key = (p.bundle && p.bundle.key) || p.group || p.id;
       groups[key] = groups[key] || { qty: 0, product: p };
       groups[key].qty += l.qty;
     });
@@ -97,7 +97,7 @@
         if (rest > 0 && !nudge) {
           const need = p.bundle.qty - rest;
           const saving = p.bundle.qty * p.price - p.bundle.price;
-          nudge = `Add ${need} more ${p.name.toLowerCase()} and save ${money(saving)}.`;
+          nudge = `Add ${need} more ${(p.bundle.label || p.name).toLowerCase()} and save ${money(saving)}.`;
         }
       } else {
         total += qty * p.price;
@@ -150,7 +150,7 @@
     if (header) {
       header.outerHTML = `
       <a class="skip-link" href="#main">Skip to content</a>
-      <div class="offer-bar"><strong>Buy 2 dungaree sets for ${money(1900)}</strong> &nbsp;·&nbsp; ${esc(S.freeDeliveryNote)}</div>
+      <div class="offer-bar"><strong>Buy 2, save more: dungaree sets 2 for ${money(1900)}</strong> &nbsp;·&nbsp; ${esc(S.freeDeliveryNote)}</div>
       <header class="site-header">
         <div class="wrap header-inner">
           <a class="brand" href="index.html" aria-label="${esc(S.name)} home">
@@ -486,6 +486,7 @@
   function initHome() {
     const grid = $("#featured-grid");
     if (grid) grid.innerHTML = P.map(cardHTML).join("");
+    $$("[data-cat-count]").forEach((el) => (el.textContent = P.filter((p) => p.category === el.dataset.catCount).length));
 
     // hero colour switcher
     const hero = $("#hero-img");
@@ -494,7 +495,8 @@
     const shopBtn = $("#hero-shop");
     const row = $("#hero-swatches");
     if (!hero || !row) return;
-    row.innerHTML = P.map(
+    const HERO = P.filter((p) => p.group === P[0].group);
+    row.innerHTML = HERO.map(
       (p, i) =>
         `<button type="button" class="swatch" role="radio" aria-checked="${i === 0}" aria-label="${esc(p.color)}" data-id="${p.id}" style="--c:${p.colorHex}" tabindex="${i === 0 ? 0 : -1}"></button>`
     ).join("");
@@ -513,7 +515,7 @@
       hero.classList.add("is-leaving");
       setTimeout(() => {
         hero.src = p.image;
-        hero.alt = `Baby wearing the ${p.color} dungaree set`;
+        hero.alt = `Baby wearing the ${p.color} ${p.name.toLowerCase()}`;
         hero.onload = () => hero.classList.remove("is-leaving");
         hero.onerror = () => {
           __imgFallback(hero);
@@ -528,7 +530,7 @@
     row.addEventListener("keydown", (e) => {
       if (!["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp"].includes(e.key)) return;
       e.preventDefault();
-      const ids = P.map((p) => p.id);
+      const ids = HERO.map((p) => p.id);
       const cur = ids.indexOf($('.swatch[aria-checked="true"]', row).dataset.id);
       const next = (cur + (e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : -1) + ids.length) % ids.length;
       pick(ids[next], true);
@@ -540,24 +542,28 @@
     if (!grid) return;
     const params = new URLSearchParams(location.search);
     let q = (params.get("q") || "").trim().toLowerCase();
-    let color = "all";
+    let cat = "all";
     let sort = "featured";
     const chips = $("#color-chips");
     chips.innerHTML =
-      `<button class="chip" type="button" data-color="all" aria-pressed="true">All colours</button>` +
-      P.map(
-        (p) =>
-          `<button class="chip" type="button" data-color="${p.id}" aria-pressed="false"><i style="--c:${p.colorHex}"></i>${esc(p.color)}</button>`
-      ).join("");
+      `<button class="chip" type="button" data-cat="all" aria-pressed="true">All</button>` +
+      [...new Set(P.map((p) => p.category))]
+        .map((c) => `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="false">${esc(c)}</button>`)
+        .join("");
+    const urlCat = params.get("cat");
+    if (urlCat && P.some((p) => p.category === urlCat)) {
+      cat = urlCat;
+      $$(".chip", chips).forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.cat === cat)));
+    }
     const qInfo = $("#search-info");
     const draw = () => {
-      let list = P.filter((p) => color === "all" || p.id === color);
+      let list = P.filter((p) => cat === "all" || p.category === cat);
       if (q) list = list.filter((p) => `${p.name} ${p.color} ${p.category}`.toLowerCase().includes(q));
       if (sort === "low") list = [...list].sort((a, b) => a.price - b.price);
       if (sort === "high") list = [...list].sort((a, b) => b.price - a.price);
       grid.innerHTML = list.length
         ? list.map(cardHTML).join("")
-        : `<div class="empty-state" style="grid-column:1/-1"><h3>No products match “${esc(q)}”</h3><p class="muted">Try a colour like peach, blue, cream or mint.</p><a class="btn btn-ghost" href="shop.html">Show all products</a></div>`;
+        : `<div class="empty-state" style="grid-column:1/-1"><h3>No products match “${esc(q)}”</h3><p class="muted">Try “dungaree”, “winter suit”, or a colour like mint or beige.</p><a class="btn btn-ghost" href="shop.html">Show all products</a></div>`;
       $("#result-count").textContent = `${list.length} ${list.length === 1 ? "product" : "products"}`;
       if (qInfo) {
         qInfo.hidden = !q;
@@ -567,7 +573,7 @@
     chips.addEventListener("click", (e) => {
       const c = e.target.closest(".chip");
       if (!c) return;
-      color = c.dataset.color;
+      cat = c.dataset.cat;
       $$(".chip", chips).forEach((x) => x.setAttribute("aria-pressed", String(x === c)));
       draw();
     });
@@ -591,7 +597,11 @@
       document.title = `${p.name} — ${p.color} | ${S.name}`;
       $("#crumb-name").textContent = `${p.name} · ${p.color}`;
       const others = siblings.filter((s) => s.id !== p.id);
-      const gallery = [p, ...others];
+      const gallery = [
+        { image: p.image, alt: `${p.name} in ${p.color}` },
+        ...(p.images || []).map((src) => ({ image: src, alt: `${p.name} in ${p.color}` })),
+        ...others.map((o) => ({ image: o.image, alt: `${o.name} in ${o.color}` })),
+      ];
       const deal = p.bundle ? `Any ${p.bundle.qty} for ${money(p.bundle.price)}` : "";
       root.innerHTML = `
         <div class="gallery">
@@ -599,7 +609,7 @@
             ${gallery
               .map(
                 (g, i) =>
-                  `<button type="button" role="listitem" data-thumb="${i}" aria-current="${i === 0}" aria-label="View ${esc(g.color)}">${img(g.image, "")}</button>`
+                  `<button type="button" role="listitem" data-thumb="${i}" aria-current="${i === 0}" aria-label="View photo ${i + 1}">${img(g.image, "")}</button>`
               )
               .join("")}
           </div>
@@ -660,7 +670,7 @@
           const g = gallery[+b.dataset.thumb];
           const main = $("#main-img");
           main.src = g.image;
-          main.alt = `${g.name} in ${g.color}`;
+          main.alt = g.alt;
           $$("[data-thumb]", root).forEach((x) => x.setAttribute("aria-current", String(x === b)));
         })
       );
@@ -749,7 +759,11 @@
     }
 
     const more = $("#more-grid");
-    if (more) more.innerHTML = P.filter((x) => x.id !== p.id).map(cardHTML).join("");
+    if (more) {
+      const rest = P.filter((x) => x.group !== p.group);
+      const related = [...rest.filter((x) => x.category === p.category), ...rest.filter((x) => x.category !== p.category)];
+      more.innerHTML = related.slice(0, 4).map(cardHTML).join("");
+    }
   }
 
   function initCheckout() {
