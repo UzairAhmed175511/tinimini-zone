@@ -621,12 +621,18 @@
     let p = byId(params.get("id")) || P[0];
     const siblings = P.filter((x) => x.group && x.group === p.group);
 
+    const mainMedia = (g) =>
+      g.video
+        ? `<video id="main-img" src="${g.video}" poster="${g.image}" autoplay muted loop playsinline controls preload="metadata" aria-label="${esc(g.alt)}"></video>`
+        : img(g.image, g.alt, 'id="main-img" loading="eager"');
+
     const render = () => {
       document.title = `${p.name} — ${p.color} | ${S.name}`;
       track("ViewContent", { content_ids: [p.id], content_name: `${p.name} - ${p.color}`, content_category: p.category, content_type: "product", value: p.price, currency: "PKR" });
       $("#crumb-name").textContent = `${p.name} · ${p.color}`;
       const others = siblings.filter((s) => s.id !== p.id);
       const gallery = [
+        ...(p.video ? [{ video: p.video, image: p.videoPoster || p.image, alt: `${p.name} in ${p.color} — video` }] : []),
         { image: p.image, alt: `${p.name} in ${p.color}` },
         ...(p.images || []).map((src) => ({ image: src, alt: `${p.name} in ${p.color}` })),
         ...others.map((o) => ({ image: o.image, alt: `${o.name} in ${o.color}` })),
@@ -638,11 +644,11 @@
             ${gallery
               .map(
                 (g, i) =>
-                  `<button type="button" role="listitem" data-thumb="${i}" aria-current="${i === 0}" aria-label="View photo ${i + 1}">${img(g.image, "")}</button>`
+                  `<button type="button" role="listitem" data-thumb="${i}" aria-current="${i === 0}" aria-label="${g.video ? "Play video" : `View photo ${i + 1}`}"${g.video ? ' class="thumb-video"' : ""}>${img(g.image, "")}</button>`
               )
               .join("")}
           </div>
-          <div class="gallery-main">${img(p.image, `${p.name} in ${p.color}`, 'id="main-img" loading="eager"')}</div>
+          <div class="gallery-main" id="gallery-main">${mainMedia(gallery[0])}</div>
         </div>
         <div class="pdp-info">
           <h1>${esc(p.name)}</h1>
@@ -697,9 +703,7 @@
       $$("[data-thumb]", root).forEach((b) =>
         b.addEventListener("click", () => {
           const g = gallery[+b.dataset.thumb];
-          const main = $("#main-img");
-          main.src = g.image;
-          main.alt = g.alt;
+          $("#gallery-main").innerHTML = mainMedia(g);
           $$("[data-thumb]", root).forEach((x) => x.setAttribute("aria-current", String(x === b)));
         })
       );

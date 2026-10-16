@@ -113,7 +113,7 @@ const SUIT = {
 };
 
 window.PRODUCTS = [
-  { ...TEDDY, id: "dungaree-peach", color: "Peach / Pink", colorHex: "#F1B3A5", image: "images/dungaree-peach.webp", images: ["images/dungaree-peach-2.webp", "images/dungaree-peach-flat.webp"], badge: "Bestseller" },
+  { ...TEDDY, id: "dungaree-peach", color: "Peach / Pink", colorHex: "#F1B3A5", image: "images/dungaree-peach.webp", images: ["images/dungaree-peach-2.webp", "images/dungaree-peach-flat.webp"], video: "videos/teddy-dungaree-peach.mp4", videoPoster: "images/teddy-dungaree-peach-video.webp", badge: "New Video" },
   { ...TEDDY, id: "dungaree-blue", color: "Light Blue", colorHex: "#A7C8E8", image: "images/dungaree-blue.webp", images: ["images/dungaree-blue-flat.webp"], badge: null },
   { ...TEDDY, id: "dungaree-cream", color: "Cream / Beige", colorHex: "#E9DCC6", image: "images/dungaree-cream.webp", images: [], badge: null },
   { ...TEDDY, id: "dungaree-mint", color: "Mint Green", colorHex: "#A6DBB8", image: "images/dungaree-mint.webp", images: ["images/dungaree-mint-2.webp"], badge: null },
