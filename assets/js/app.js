@@ -217,7 +217,10 @@
               <h3>Shop</h3>
               <ul>
                 <li><a href="shop.html">All products</a></li>
-                <li><a href="product.html?id=dungaree-peach">Baby dungaree set</a></li>
+                <li><a href="baby-dungaree.html">Baby dungaree sets</a></li>
+                <li><a href="baby-winter-dress.html">Baby winter dresses</a></li>
+                <li><a href="kids-tracksuit.html">Kids tracksuits</a></li>
+                <li><a href="boys-denim-suit.html">Boys denim suits</a></li>
                 <li><a href="wishlist.html">Wishlist</a></li>
                 <li><a href="size-guide.html">Size guide</a></li>
               </ul>
