@@ -112,14 +112,81 @@ const SUIT = {
   care: ["Machine wash cold, inside out", "Wash with similar colours", "Do not tumble dry", "Dry in shade"],
 };
 
+const FLEECE_DUNGAREE_DEAL = { qty: 2, price: 2300, key: "fleece-dungaree", label: "fleece dungaree set" };
+const TRACKSUIT_DEAL = { qty: 2, price: 2300, key: "tracksuit", label: "fleece tracksuit" };
+const DENIM_VEST_DEAL = { qty: 2, price: 2500, key: "denim-vest", label: "denim vest set" };
+
+const FLEECE_DUNGAREE = {
+  group: "happy-bear-fleece-dungaree",
+  name: "Happy Bear Fleece Dungaree Set",
+  category: "Winter dungarees",
+  price: 1199,
+  compareAt: null,
+  bundle: FLEECE_DUNGAREE_DEAL,
+  sizes: BABY_SIZES,
+  description:
+    "A warm baby winter dungaree in soft fleece with a cute 3D bear face on the bib, paired with a bear-print fleece sweatshirt. Cosy for cold mornings, easy to put on, and adorable in every photo — for baby boys and baby girls, 6 to 24 months.",
+  features: [
+    "Two-piece set: bear-print fleece sweatshirt + fleece dungaree",
+    "Plush 3D bear face on the front bib",
+    "Soft, warm fleece that's gentle on baby skin",
+    "Unisex — baby boy and baby girl winter dress",
+  ],
+  care: ["Machine wash cold, inside out", "Wash with similar colours", "Do not bleach", "Dry in shade"],
+};
+
+const TRACKSUIT = {
+  group: "kids-fleece-tracksuit",
+  name: "Kids Fleece Tracksuit",
+  category: "Fleece tracksuits",
+  price: 1199,
+  compareAt: null,
+  bundle: TRACKSUIT_DEAL,
+  sizes: KIDS_SIZES,
+  description:
+    "A cosy kids winter tracksuit: a soft fleece cartoon-print sweatshirt with a matching jogger trouser. Warm inside, comfy all day, with ribbed cuffs and an elastic waist — perfect for school runs, play and family outings.",
+  features: [
+    "Two-piece set: printed fleece sweatshirt + jogger trouser",
+    "Soft brushed fleece inside for warmth",
+    "Elastic waist and ribbed cuffs",
+    "Jogger colours: Orange or Blue",
+  ],
+  care: ["Machine wash cold, inside out", "Wash darks separately", "Do not bleach", "Dry in shade"],
+};
+
+const DENIM_VEST = {
+  group: "kids-denim-vest-set",
+  name: "Kids Denim Vest Set",
+  category: "Denim sets",
+  price: 1299,
+  compareAt: null,
+  bundle: DENIM_VEST_DEAL,
+  sizes: KIDS_SIZES,
+  description:
+    "A smart boys outfit: a full-sleeve shirt with a built-in denim vest look, paired with soft stretch denim jeans. Ready for birthdays, weddings, family visits and winter outings — stylish without being stiff.",
+  features: [
+    "Two-piece set: denim vest-look full-sleeve shirt + denim jeans",
+    "Stretch denim for easy movement",
+    "Party-ready look for boys",
+    "Available in White and Black",
+  ],
+  care: ["Machine wash cold, inside out", "Wash denim separately", "Do not bleach", "Dry in shade"],
+};
+
 window.PRODUCTS = [
-  { ...TEDDY, id: "dungaree-peach", color: "Peach / Pink", colorHex: "#F1B3A5", image: "images/dungaree-peach.webp", images: ["images/dungaree-peach-2.webp", "images/dungaree-peach-flat.webp"], video: "videos/teddy-dungaree-peach.mp4", videoPoster: "images/teddy-dungaree-peach-video.webp", badge: "New Video" },
+  { ...TEDDY, id: "dungaree-peach", color: "Peach / Pink", colorHex: "#F1B3A5", image: "images/dungaree-peach.webp", images: ["images/dungaree-peach-real.webp", "images/dungaree-peach-real-back.webp", "images/dungaree-peach-2.webp", "images/dungaree-peach-flat.webp"], video: "videos/teddy-dungaree-peach.mp4", videoPoster: "images/teddy-dungaree-peach-video.webp", badge: "New Video" },
   { ...TEDDY, id: "dungaree-blue", color: "Light Blue", colorHex: "#A7C8E8", image: "images/dungaree-blue.webp", images: ["images/dungaree-blue-flat.webp"], badge: null },
   { ...TEDDY, id: "dungaree-cream", color: "Cream / Beige", colorHex: "#E9DCC6", image: "images/dungaree-cream.webp", images: [], badge: null },
-  { ...TEDDY, id: "dungaree-mint", color: "Mint Green", colorHex: "#A6DBB8", image: "images/dungaree-mint.webp", images: ["images/dungaree-mint-2.webp"], badge: null },
-  { ...BEAR, id: "bear-dungaree", color: "Denim Blue", colorHex: "#6E8FB8", image: "images/bear-dungaree.webp", images: ["images/bear-dungaree-close.webp", "images/bear-dungaree-back.webp", "images/bear-dungaree-pair.webp"], badge: "New" },
+  { ...TEDDY, id: "dungaree-mint", color: "Mint Green", colorHex: "#A6DBB8", image: "images/dungaree-mint.webp", images: ["images/dungaree-mint-real.webp", "images/dungaree-mint-2.webp"], badge: null },
+  { ...BEAR, id: "bear-dungaree", color: "Denim Blue", colorHex: "#6E8FB8", image: "images/bear-dungaree.webp", images: ["images/bear-dungaree-real.webp", "images/bear-dungaree-close.webp", "images/bear-dungaree-back.webp", "images/bear-dungaree-pair.webp"], badge: "New" },
   { ...HAPPY, id: "happy-set-light", color: "Light (Beige)", colorHex: "#C9A27E", image: "images/happy-set-light.webp", images: ["images/happy-set-light-side.webp", "images/happy-set-light-back.webp"], badge: "New" },
   { ...HAPPY, id: "happy-set-dark", color: "Dark (Brown)", colorHex: "#6B4330", image: "images/happy-set-dark.webp", images: ["images/happy-set-dark-side.webp", "images/happy-set-dark-back.webp"], badge: null },
   { ...SUIT, id: "winter-suit-olive", color: "Olive Green", colorHex: "#7D8B62", image: "images/winter-suit-olive.webp", images: ["images/winter-suit-olive-hood.webp", "images/winter-suit-olive-back.webp", "images/winter-suit-olive-sitting.webp"], badge: "Winter" },
   { ...SUIT, id: "winter-suit-beige", color: "Beige", colorHex: "#CDB79A", image: "images/winter-suit-beige.webp", images: ["images/winter-suit-beige-hood.webp", "images/winter-suit-beige-back.webp", "images/winter-suit-beige-sitting.webp"], badge: "Winter" },
+  { ...FLEECE_DUNGAREE, id: "fleece-dungaree-blue", color: "Sky Blue", colorHex: "#9EC6E6", image: "images/fleece-dungaree-blue.webp", images: ["images/fleece-dungaree-blue-back.webp", "images/fleece-dungaree-blue-poster.webp"], badge: "New" },
+  { ...FLEECE_DUNGAREE, id: "fleece-dungaree-beige", color: "Beige", colorHex: "#D8C3A5", image: "images/fleece-dungaree-beige.webp", images: ["images/fleece-dungaree-beige-back.webp", "images/fleece-dungaree-beige-poster.webp"], badge: "New" },
+  { ...TRACKSUIT, id: "tracksuit-blue", color: "Blue Jogger", colorHex: "#3F6FB5", image: "images/fleece-tracksuit-blue.webp", images: ["images/fleece-tracksuit-sweatshirt.webp", "images/fleece-tracksuit-blue-jogger.webp", "images/fleece-tracksuit-blue-poster.webp"], video: "videos/fleece-tracksuit-handheld.mp4", videoPoster: "images/fleece-tracksuit-handheld-video.webp", badge: "New Video" },
+  { ...TRACKSUIT, id: "tracksuit-orange", color: "Orange Jogger", colorHex: "#E9813A", image: "images/fleece-tracksuit-orange.webp", images: ["images/fleece-tracksuit-sweatshirt.webp", "images/fleece-tracksuit-orange-jogger.webp", "images/fleece-tracksuit-orange-poster.webp"], badge: "New" },
+  { ...DENIM_VEST, id: "denim-vest-white", color: "White", colorHex: "#F2F2F2", image: "images/denim-vest-white-real.webp", images: ["images/denim-vest-jeans-real.webp", "images/denim-vest-poster.webp"], video: "videos/denim-vest-white.mp4", videoPoster: "images/denim-vest-white-video.webp", badge: "New Video" },
+  { ...DENIM_VEST, id: "denim-vest-black", color: "Black", colorHex: "#222222", image: "images/denim-vest-black-real.webp", images: ["images/denim-vest-jeans-real.webp", "images/denim-vest-poster.webp"], video: "videos/denim-vest-black.mp4", videoPoster: "images/denim-vest-black-video.webp", badge: "New Video" },
 ];

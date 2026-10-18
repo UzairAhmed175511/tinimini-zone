@@ -628,6 +628,14 @@
 
     const render = () => {
       document.title = `${p.name} — ${p.color} | ${S.name}`;
+      const base = "https://tinimini-zone.netlify.app/";
+      const descTxt = `${p.name} (${p.color}) — Rs. ${p.price}${p.bundle ? `, 2 for Rs. ${p.bundle.price}` : ""}. Sizes ${p.sizes.join(", ")}. Cash on delivery all over Pakistan.`;
+      const setMeta = (sel, attr, val) => { const m = document.querySelector(sel); if (m) m.setAttribute(attr, val); };
+      setMeta('meta[name="description"]', "content", descTxt);
+      setMeta('meta[property="og:title"]', "content", document.title);
+      setMeta('meta[property="og:description"]', "content", descTxt);
+      setMeta('meta[property="og:image"]', "content", base + p.image);
+      setMeta('link[rel="canonical"]', "href", `${base}product.html?id=${p.id}`);
       track("ViewContent", { content_ids: [p.id], content_name: `${p.name} - ${p.color}`, content_category: p.category, content_type: "product", value: p.price, currency: "PKR" });
       $("#crumb-name").textContent = `${p.name} · ${p.color}`;
       const others = siblings.filter((s) => s.id !== p.id);
