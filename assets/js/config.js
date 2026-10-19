@@ -13,6 +13,7 @@ window.STORE = {
   instagram: "https://www.instagram.com/08tiniminizone/",
   tiktok: "https://www.tiktok.com/@08tiniminizone",
   youtube: "https://www.youtube.com/@08tiniminizone",
+  pinterest: "https://www.pinterest.com/08tiniminizone/",
   // Meta (Facebook/Instagram) Pixel ID from Events Manager, e.g. "123456789012345".
   // Leave empty to turn tracking off.
   metaPixelId: "3036047803407996",
