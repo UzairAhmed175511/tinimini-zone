@@ -223,6 +223,7 @@
                 <li><a href="boys-denim-suit.html">Boys denim suits</a></li>
                 <li><a href="wishlist.html">Wishlist</a></li>
                 <li><a href="size-guide.html">Size guide</a></li>
+                <li><a href="guides.html">Parenting guides</a></li>
               </ul>
             </div>
             <div>
