@@ -31,7 +31,7 @@ window.STORE = {
    ------------------------------------------------------------------ */
 
 const BABY_SIZES = ["Small (6–12 months)", "Medium (12–18 months)", "Large (18–24 months)"];
-const KIDS_SIZES = ["Small", "Medium", "Large"];
+const KIDS_SIZES = BABY_SIZES; // owner: S/M/L = 6–24 months for all products
 
 const DUNGAREE_DEAL = { qty: 2, price: 1900, key: "dungaree", label: "dungaree set" };
 const HAPPY_DEAL = { qty: 2, price: 2100, key: "happy-set", label: "2-piece set" };
