@@ -31,7 +31,8 @@ window.STORE = {
    ------------------------------------------------------------------ */
 
 const BABY_SIZES = ["Small (1 year)", "Medium (2 years)", "Large (3 years)"];
-const DUNGAREE_SIZES = ["1–2 Years"]; // owner 24 Oct: denim dungaree sets + Happy Bear 2-piece come in 1–2 years only
+const DENIM_SIZES = ["Size 1 (6–9 months)", "Size 2 (9–12 months)"]; // owner 24 Oct: denim dungarees = size 1 (6–9m) / size 2 (9–12m), NOT 1–2 years
+const DUNGAREE_SIZES = ["1–2 Years"]; // Happy Bear 2-piece
 const KIDS_SIZES = BABY_SIZES; // owner: S/M/L = 6 months–3 years for all products
 
 const DUNGAREE_DEAL = { qty: 2, price: 1900, key: "dungaree", label: "dungaree set" };
@@ -45,7 +46,7 @@ const TEDDY = {
   price: 999,
   compareAt: null,
   bundle: DUNGAREE_DEAL,
-  sizes: DUNGAREE_SIZES,
+  sizes: DENIM_SIZES,
   description:
     "A soft denim dungaree with a plush 3D teddy on the bib, paired with a printed long-sleeve top. Easy snaps, a relaxed fit for crawling and toddling, and a look that's ready for photos, family visits and everyday play.",
   features: [
@@ -64,7 +65,7 @@ const BEAR = {
   price: 999,
   compareAt: null,
   bundle: DUNGAREE_DEAL,
-  sizes: DUNGAREE_SIZES,
+  sizes: DENIM_SIZES,
   description:
     "Our cream teddy-print top with a classic blue denim dungaree. A fluffy bear on the bib, “Bear Happy” embroidery on the leg and roomy back pockets — comfy enough for all day, cute enough for every photo.",
   features: [
