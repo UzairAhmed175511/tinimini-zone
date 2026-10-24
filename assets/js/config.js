@@ -31,7 +31,7 @@ window.STORE = {
    ------------------------------------------------------------------ */
 
 const BABY_SIZES = ["Small (1 year)", "Medium (2 years)", "Large (3 years)"];
-const DUNGAREE_SIZES = ["1–2 Years"]; // owner 24 Oct: denim dungaree sets come in 1–2 years only
+const DUNGAREE_SIZES = ["1–2 Years"]; // owner 24 Oct: denim dungaree sets + Happy Bear 2-piece come in 1–2 years only
 const KIDS_SIZES = BABY_SIZES; // owner: S/M/L = 6 months–3 years for all products
 
 const DUNGAREE_DEAL = { qty: 2, price: 1900, key: "dungaree", label: "dungaree set" };
@@ -83,7 +83,7 @@ const HAPPY = {
   price: 1099,
   compareAt: null,
   bundle: HAPPY_DEAL,
-  sizes: BABY_SIZES,
+  sizes: DUNGAREE_SIZES,
   description:
     "A cosy sweatshirt and jogger set with a “HAPPY” teddy print, contrast raglan sleeves and striped cuffs. Soft, warm and easy to move in — made for playtime, family visits and cooler days.",
   features: [
