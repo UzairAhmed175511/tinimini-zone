@@ -31,6 +31,7 @@ window.STORE = {
    ------------------------------------------------------------------ */
 
 const BABY_SIZES = ["Small (1 year)", "Medium (2 years)", "Large (3 years)"];
+const DUNGAREE_SIZES = ["1–2 Years"]; // owner 24 Oct: denim dungaree sets come in 1–2 years only
 const KIDS_SIZES = BABY_SIZES; // owner: S/M/L = 6 months–3 years for all products
 
 const DUNGAREE_DEAL = { qty: 2, price: 1900, key: "dungaree", label: "dungaree set" };
@@ -44,7 +45,7 @@ const TEDDY = {
   price: 999,
   compareAt: null,
   bundle: DUNGAREE_DEAL,
-  sizes: BABY_SIZES,
+  sizes: DUNGAREE_SIZES,
   description:
     "A soft denim dungaree with a plush 3D teddy on the bib, paired with a printed long-sleeve top. Easy snaps, a relaxed fit for crawling and toddling, and a look that's ready for photos, family visits and everyday play.",
   features: [
@@ -63,7 +64,7 @@ const BEAR = {
   price: 999,
   compareAt: null,
   bundle: DUNGAREE_DEAL,
-  sizes: BABY_SIZES,
+  sizes: DUNGAREE_SIZES,
   description:
     "Our cream teddy-print top with a classic blue denim dungaree. A fluffy bear on the bib, “Bear Happy” embroidery on the leg and roomy back pockets — comfy enough for all day, cute enough for every photo.",
   features: [
@@ -175,11 +176,11 @@ const DENIM_VEST = {
 };
 
 window.PRODUCTS = [
-  { ...TEDDY, id: "dungaree-peach", color: "Peach / Pink", colorHex: "#F1B3A5", image: "images/dungaree-peach.webp", images: ["images/dungaree-peach-real.webp", "images/dungaree-peach-real-back.webp", "images/dungaree-peach-2.webp", "images/dungaree-peach-flat.webp"], video: "videos/teddy-dungaree-peach.mp4", videoPoster: "images/teddy-dungaree-peach-video.webp", badge: "New Video" },
+  { ...TEDDY, lastPiece: true, id: "dungaree-peach", color: "Peach / Pink", colorHex: "#F1B3A5", image: "images/dungaree-peach.webp", images: ["images/dungaree-peach-real.webp", "images/dungaree-peach-real-back.webp", "images/dungaree-peach-2.webp", "images/dungaree-peach-flat.webp"], video: "videos/teddy-dungaree-peach.mp4", videoPoster: "images/teddy-dungaree-peach-video.webp", badge: "Last Piece" },
   { ...TEDDY, id: "dungaree-blue", color: "Light Blue", colorHex: "#A7C8E8", image: "images/dungaree-blue.webp", images: ["images/dungaree-blue-flat.webp"], badge: null },
   { ...TEDDY, id: "dungaree-cream", color: "Cream / Beige", colorHex: "#E9DCC6", image: "images/dungaree-cream.webp", images: [], badge: null },
-  { ...TEDDY, id: "dungaree-mint", color: "Mint Green", colorHex: "#A6DBB8", image: "images/dungaree-mint.webp", images: ["images/dungaree-mint-real.webp", "images/dungaree-mint-2.webp"], badge: null },
-  { ...BEAR, id: "bear-dungaree", color: "Denim Blue", colorHex: "#6E8FB8", image: "images/bear-dungaree.webp", images: ["images/bear-dungaree-real.webp", "images/bear-dungaree-close.webp", "images/bear-dungaree-back.webp", "images/bear-dungaree-pair.webp"], badge: "New" },
+  { ...TEDDY, lastPiece: true, id: "dungaree-mint", color: "Mint Green", colorHex: "#A6DBB8", image: "images/dungaree-mint.webp", images: ["images/dungaree-mint-real.webp", "images/dungaree-mint-2.webp"], badge: "Last Piece" },
+  { ...BEAR, lastPiece: true, id: "bear-dungaree", color: "Denim Blue", colorHex: "#6E8FB8", image: "images/bear-dungaree.webp", images: ["images/bear-dungaree-real.webp", "images/bear-dungaree-close.webp", "images/bear-dungaree-back.webp", "images/bear-dungaree-pair.webp"], badge: "Last Piece" },
   { ...HAPPY, id: "happy-set-light", color: "Light (Beige)", colorHex: "#C9A27E", image: "images/happy-set-light.webp", images: ["images/happy-set-light-side.webp", "images/happy-set-light-back.webp"], video: "videos/happy-set-light.mp4", videoPoster: "images/happy-set-light-video.webp", badge: "New Video" },
   { ...HAPPY, id: "happy-set-dark", color: "Dark (Brown)", colorHex: "#6B4330", image: "images/happy-set-dark.webp", images: ["images/happy-set-dark-side.webp", "images/happy-set-dark-back.webp"], video: "videos/happy-set-dark.mp4", videoPoster: "images/happy-set-dark-video.webp", badge: "New Video" },
   { ...SUIT, id: "winter-suit-olive", color: "Olive Green", colorHex: "#7D8B62", image: "images/winter-suit-olive.webp", images: ["images/winter-suit-olive-hood.webp", "images/winter-suit-olive-back.webp", "images/winter-suit-olive-sitting.webp"], badge: "Winter" },
