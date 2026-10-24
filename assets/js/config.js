@@ -30,8 +30,8 @@ window.STORE = {
    images  : extra gallery photos for that colour
    ------------------------------------------------------------------ */
 
-const BABY_SIZES = ["Small (6–12 months)", "Medium (12–18 months)", "Large (18–24 months)"];
-const KIDS_SIZES = BABY_SIZES; // owner: S/M/L = 6–24 months for all products
+const BABY_SIZES = ["Small (1 year)", "Medium (2 years)", "Large (3 years)"];
+const KIDS_SIZES = BABY_SIZES; // owner: S/M/L = 6 months–3 years for all products
 
 const DUNGAREE_DEAL = { qty: 2, price: 1900, key: "dungaree", label: "dungaree set" };
 const HAPPY_DEAL = { qty: 2, price: 2100, key: "happy-set", label: "2-piece set" };
@@ -126,7 +126,7 @@ const FLEECE_DUNGAREE = {
   bundle: FLEECE_DUNGAREE_DEAL,
   sizes: BABY_SIZES,
   description:
-    "A warm baby winter dungaree in soft fleece with a cute 3D bear face on the bib, paired with a bear-print fleece sweatshirt. Cosy for cold mornings, easy to put on, and adorable in every photo — for baby boys and baby girls, 6 to 24 months.",
+    "A warm baby winter dungaree in soft fleece with a cute 3D bear face on the bib, paired with a bear-print fleece sweatshirt. Cosy for cold mornings, easy to put on, and adorable in every photo — for baby boys and baby girls, 6 months to 3 years.",
   features: [
     "Two-piece set: bear-print fleece sweatshirt + fleece dungaree",
     "Plush 3D bear face on the front bib",
