@@ -11,6 +11,8 @@
 
   const money = (n) => `${S.currency} ${Math.round(n).toLocaleString("en-PK")}`;
   const byId = (id) => P.find((p) => p.id === id);
+  // Each product has its own static page (<slug>.html) so Google can index it separately.
+  const purl = (p) => (p.slug ? `${p.slug}.html` : `product.html?id=${p.id}`);
   const esc = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const waLink = (text) => `https://wa.me/${S.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
@@ -287,7 +289,7 @@
     if (!p) return "";
     return `
       <div class="line-item">
-        <a href="product.html?id=${p.id}">${img(p.image, `${p.name} in ${p.color}`)}</a>
+        <a href="${purl(p)}">${img(p.image, `${p.name} in ${p.color}`)}</a>
         <div>
           <h3>${esc(p.name)}</h3>
           <p class="meta">${esc(p.color)} · ${esc(l.size)}${compact ? ` · Qty ${l.qty}` : ""}</p>
@@ -414,7 +416,7 @@
           <button class="card-quick" type="button" data-quick="${p.id}">Quick add</button>
         </div>
         <div class="card-body">
-          <h3 class="card-title"><a href="product.html?id=${p.id}">${esc(p.name)}</a></h3>
+          <h3 class="card-title"><a href="${purl(p)}">${esc(p.name)}</a></h3>
           <p class="card-color"><i style="--c:${p.colorHex}"></i>${esc(p.color)}</p>
           <p class="price">${money(p.price)}${p.compareAt ? `<s>${money(p.compareAt)}</s>` : ""}</p>
         </div>
@@ -543,7 +545,7 @@
       label.textContent = p.color;
       tag.style.setProperty("--c", p.colorHex);
       $("strong", tag).textContent = p.color;
-      shopBtn.href = `product.html?id=${p.id}`;
+      shopBtn.href = purl(p);
       hero.classList.add("is-leaving");
       setTimeout(() => {
         hero.src = p.image;
@@ -623,7 +625,7 @@
     const root = $("#pdp");
     if (!root) return;
     const params = new URLSearchParams(location.search);
-    let p = byId(params.get("id")) || P[0];
+    let p = byId(document.body.dataset.productId) || byId(params.get("id")) || P[0];
     const siblings = P.filter((x) => x.group && x.group === p.group);
 
     const mainMedia = (g) =>
@@ -632,15 +634,15 @@
         : img(g.image, g.alt, 'id="main-img" loading="eager"');
 
     const render = () => {
-      document.title = `${p.name} — ${p.color} | ${S.name}`;
+      document.title = `${p.name} – ${p.color} | ${money(p.price)} | ${S.name}`; // same as tools/build_product_pages.js
       const base = "https://tinimini-zone.netlify.app/";
-      const descTxt = `${p.name} (${p.color}) — Rs. ${p.price}${p.bundle ? `, 2 for Rs. ${p.bundle.price}` : ""}. Sizes ${p.sizes.join(", ")}. Cash on delivery all over Pakistan.`;
+      const descTxt = `${p.name} in ${p.color} for ${money(p.price)}${p.bundle ? ` (any ${p.bundle.qty} for ${money(p.bundle.price)})` : ""}. Sizes: ${p.sizes.join(", ")}. Cash on delivery all over Pakistan, order on WhatsApp ${S.phoneDisplay}.`;
       const setMeta = (sel, attr, val) => { const m = document.querySelector(sel); if (m) m.setAttribute(attr, val); };
       setMeta('meta[name="description"]', "content", descTxt);
       setMeta('meta[property="og:title"]', "content", document.title);
       setMeta('meta[property="og:description"]', "content", descTxt);
       setMeta('meta[property="og:image"]', "content", base + p.image);
-      setMeta('link[rel="canonical"]', "href", `${base}product.html?id=${p.id}`);
+      setMeta('link[rel="canonical"]', "href", base + purl(p));
       track("ViewContent", { content_ids: [p.id], content_name: `${p.name} - ${p.color}`, content_category: p.category, content_type: "product", value: p.price, currency: "PKR" });
       $("#crumb-name").textContent = `${p.name} · ${p.color}`;
       const others = siblings.filter((s) => s.id !== p.id);
@@ -674,7 +676,7 @@
                 ${siblings
                   .map(
                     (s) =>
-                      `<a class="swatch" href="product.html?id=${s.id}" data-sib="${s.id}" style="--c:${s.colorHex}" aria-label="${esc(s.color)}" aria-current="${s.id === p.id}"></a>`
+                      `<a class="swatch" href="${purl(s)}" data-sib="${s.id}" style="--c:${s.colorHex}" aria-label="${esc(s.color)}" aria-current="${s.id === p.id}"></a>`
                   )
                   .join("")}
               </div>
@@ -725,7 +727,8 @@
         a.addEventListener("click", (e) => {
           e.preventDefault();
           p = byId(a.dataset.sib);
-          history.replaceState(null, "", `product.html?id=${p.id}`);
+          history.replaceState(null, "", purl(p));
+          document.body.dataset.productId = p.id;
           render();
         })
       );

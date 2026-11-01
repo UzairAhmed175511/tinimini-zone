@@ -25,7 +25,7 @@ Everything you'll want to change is in **`assets/js/config.js`**:
 - WhatsApp number, email, Facebook / Instagram links
 - `deliveryFee` — set a number (e.g. `200`) to show delivery charges, or `null` to show "Confirmed on WhatsApp"
 - Products: name, colour, price, bundle deal, sizes, description, image
-- To add a new product, copy one product block, give it a new `id` and image
+- To add a new product, copy one product block, give it a new `id`, a `slug` (its page name) and image, then run `node tools/build_product_pages.js` — it builds the product's own page (`<slug>.html`), adds it to `sitemap.xml` and keeps the old `product.html?id=` links redirecting
 
 Sizes (Small, Medium, Large) are in `config.js`; the size chart text is in `size-guide.html` and `product.html`.
 
